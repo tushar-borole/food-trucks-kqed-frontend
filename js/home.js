@@ -104,11 +104,6 @@ $(document).ready(function () {
     var map = new google.maps.Map(document.getElementById("map"), options);
 
 
-    map.addListener('center_changed', function () {
-        // 3 seconds after the center of the map has changed, pan back to the
-        // marker.
-        console.log(map)
-    });
 
     var settings = {
         "async": true,
@@ -120,18 +115,6 @@ $(document).ready(function () {
 
 
     $.ajax(settings).done(function (response) {
-
-        var truckType = _.remove(_.map(_.uniqBy(response, 'FacilityType'), "FacilityType"), function (n) {
-            return n != "";
-        });
-        for (i = 0; i < truckType.length; i++) {
-            $("#trucktype").append("<option value=" + truckType[i] + ">" + truckType[i] + "</option>")
-
-        }
-        console.log(truckType)
-
-
-
 
         for (var i = 0; i < response.length; i++) {
             var latLng = new google.maps.LatLng(response[i].Latitude,
